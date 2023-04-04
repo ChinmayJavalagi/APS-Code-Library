@@ -1,0 +1,29 @@
+# SC - O(V) [storing] + O(V) [visited] + O(V) [worst case recursion] = O(V)
+# TC - (V) + (2E) [Undirected graph]
+# TC - (V) + (E)  [directed graph]
+
+
+class Solution:
+    
+    #Function to return a list containing the DFS traversal of the graph.
+    def dfsOfGraph(self, V, adj):
+        visited = [False]*V
+        arr = []
+        for u in range(V):
+            if visited[u] == False:
+                self.dfs(u, adj, visited, arr)
+                
+        return arr
+        
+    def dfs(self, s, adj, visited, arr):
+        visited[s] = True
+        arr.append(s)
+        for u in adj[s]:
+            if visited[u] == False:
+                self.dfs(u, adj, visited, arr)
+            
+        return arr    
+
+
+
+#Works well for both connected and disconnected graphs

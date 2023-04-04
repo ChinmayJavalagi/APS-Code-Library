@@ -1,0 +1,63 @@
+# SC - O(V)
+# TC - O(V + 2E) + O(N) [ disconnected graph]
+# 2E - no of degree
+
+#BFS
+
+from typing import List
+from collections import deque
+class Solution:
+	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+	    	#Code here
+		visited = [False]*V
+		for i in range(V):
+		    if visited[i] == False:
+		        if self.bfsCycle(adj, i, visited):
+		            return True
+		return False
+	def bfsCycle(self, adj, u, visited):
+	    q = deque()
+	    q.append([u, -1])
+	    visited[u] = True
+	    while q:
+	        s = q.popleft()
+	        cur = s[0]
+	        parent = s[1]
+	        for u in adj[cur]:
+	            if visited[u] == False:
+	                q.append([u, cur])
+	                visited[u] = True
+	            elif visited[u] == True and u != parent:
+	                return True
+	    return False
+	        
+
+
+
+
+#DFS
+
+class Solution:
+    #Function to detect cycle in an undirected graph.
+	def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+	    	#Code here
+	    	visited = [False]*V
+	    	for i in range(V):
+	    	    if visited[i] == False:
+	    	        if self.bfsCycle(adj, i, -1, visited):
+	    	            return True
+	    	return False
+	    	        
+	    	        
+	def bfsCycle(self, adj, cur, parent, visited):
+	    visited[cur] = True
+	    for u in adj[cur]:
+	        if visited[u] == False:
+	            if self.bfsCycle(adj, u, cur, visited):
+	                return True
+	        elif u != parent:
+	            return True
+	    return False
+
+
+   

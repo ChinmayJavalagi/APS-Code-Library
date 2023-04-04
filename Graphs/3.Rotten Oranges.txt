@@ -1,0 +1,44 @@
+# SC - N X M 
+# TC - N X M [while] + (N X M * 4) [for] = N X M
+
+
+from collections import deque
+class Solution:
+
+    #Function to find minimum time required to rot all oranges. 
+	def orangesRotting(self, grid):
+		#Code here
+		r = len(grid)
+		c = len(grid[0])
+		
+		q = deque()
+		visited = [[False for i in range(c)] for j in range(r)]
+		
+		for i in range(r):
+		    for j in range(c):
+		        if grid[i][j] == 2:
+		            q.append([[i, j],0])
+		            visited[i][j] = 2
+		        else:
+		            visited[i][j] = 0
+        tm = 0
+		drow = [-1,0,1,0]
+		dcol = [0,1,0,-1]
+		while q:
+		    s = q.popleft()
+		    row = s[0][0]
+		    col = s[0][1]
+		    tm = max(tm, s[1])
+		    for i in range(4):
+		        nrow = row+drow[i]
+		        ncol = col+dcol[i]
+		        if nrow>=0 and nrow<n and ncol>=0 and ncol<m and visited[nrow][ncol]!=2 and grid[nrow][ncol] == 1:
+		            q.append([[nrow, ncol], s[1]+1])
+		            visited[nrow][ncol] = 2
+		  
+		  
+		for i in range(r):
+		    for j in range(c):
+		        if visited[i][j]!=2 and grid[i][j] == 1:
+		            return -1
+		return tm

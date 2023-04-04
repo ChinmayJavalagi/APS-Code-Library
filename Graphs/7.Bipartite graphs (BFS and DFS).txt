@@ -1,0 +1,66 @@
+# TC - O(V+E)
+
+#BFS
+
+from collections import deque
+class Solution:
+    def isBipartite(self, V, adj):
+        #code here
+        color = [-1]*V
+        for i in range(V):
+            if color[i] == -1:
+                if not self.bfs(adj, color, i):
+                    return False
+        return True
+        
+        
+    def bfs(self, adj, color, s):
+        q = deque()
+        q.append(s)
+        color[s] = 1
+        
+        while q:
+            s = q.popleft()
+            for i in adj[s]:
+                if color[i] == -1:
+                    color[i] = 1-color[s]
+                    q.append(i)
+                elif color[i] == color[s]:
+                    return False
+        return True
+	                
+	
+
+
+
+
+#DFS
+from collections import deque
+class Solution:
+    def isBipartite(self, V, adj):
+        #code here
+        color = [-1]*V
+        for i in range(V):
+            if color[i] == -1:
+                if not self.dfs(adj, color, i):
+                    return False
+        return True
+        
+        
+    def dfs(self, adj, color, i):
+        if color[i] == -1: color[i] = 1
+
+        for u in adj[i]:
+            if color[u] == -1:
+                color[u] = 1 - color[i]
+                if not self.dfs(adj, color, u):
+                    return False
+            elif color[u] == color[i]:
+                return False
+                
+        return True
+            
+
+                    
+    
+  

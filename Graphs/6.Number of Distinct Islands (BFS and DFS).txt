@@ -1,0 +1,72 @@
+#BFS
+
+import sys
+from typing import List
+from collections import deque
+sys.setrecursionlimit(10**8)
+class Solution:
+    def countDistinctIslands(self, grid : List[List[int]]) -> int:
+        # code her
+        n = len(grid)
+        m = len(grid[0])
+        visited = [[False for i in range(m)]for j in range(n)]
+        setty = set()
+        
+        for i in range(n):
+            for j in range(m):
+                if visited[i][j] == False and grid[i][j] == 1:
+                    arr = []
+                    self.bfs(i, j, arr, grid, visited, i, j)
+                    setty.add(tuple(arr))
+                    
+        return len(setty)
+        
+        
+    def bfs(self, row0, col0, arr, grid, visited, row, col):
+        n = len(grid)
+        m = len(grid[0])
+        
+        q = deque()
+        q.append([row, col])
+        visited[row][col] = 1
+        
+        drow = [-1,0,1,0]
+        dcol = [0,1,0,-1]
+        
+        while q:
+            s = q.popleft()
+            row = s[0]
+            col = s[1]
+            arr.append((row0-row, col0-col))
+            for i in range(4):
+                nrow = row + drow[i]
+                ncol = col + dcol[i]
+            
+                if nrow >= 0 and nrow<n and ncol >=0 and ncol <m and not visited[nrow][ncol] and grid[nrow][ncol] == 1:
+                    visited[nrow][ncol] = 1
+                    q.append([nrow, ncol])
+
+
+
+
+
+#DFS
+
+
+
+def dfs(self, row0, col0, arr, grid, visited, row, col):
+        n = len(grid)
+        m = len(grid[0])
+        
+        visited[row][col] = 1
+        arr.append(tuple([row-row0, col-col0]))
+        
+        drow = [-1,0,1,0]
+        dcol = [0,1,0,-1]
+        
+        for i in range(4):
+            nrow = row + drow[i]
+            ncol = col + dcol[i]
+            
+            if nrow >= 0 and nrow<n and ncol >=0 and ncol <m and not visited[nrow][ncol] and grid[nrow][ncol] == 1:
+                self.dfs(row0, col0, arr, grid, visited, nrow, ncol)

@@ -1,0 +1,30 @@
+# TC - O( V + E) [Directed]
+
+#DFS
+
+class Solution:
+    
+    #Function to detect cycle in a directed graph.
+    def isCyclic(self, V, adj):
+        # code here
+        pathvis = [0]*V
+        visited = [0]*V
+        for i in range(V):
+            if not visited[i]:
+                if self.dfs(adj, visited, pathvis, i):
+                    return True
+        return False
+        
+    
+    def dfs(self, adj, visited, pathvis, s):
+        visited[s] = 1
+        pathvis[s] = 1
+        for u in adj[s]:
+            if visited[u] == 0:
+                if self.dfs(adj, visited, pathvis, u): 
+                    return True
+            elif visited[u] == 1 and pathvis[u] == 1:
+                return True
+        pathvis[s] = 0
+        
+        return False
