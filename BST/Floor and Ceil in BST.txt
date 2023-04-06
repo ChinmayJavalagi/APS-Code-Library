@@ -1,0 +1,35 @@
+#Floor
+
+def floor(root,x):
+    # cod
+    res = -1
+    while root:
+        if root.data == x:
+            return x
+        elif root.data>x:
+            root = root.left
+        else:
+            res = root.data
+            root = root.right
+       
+    return res
+
+
+#Ceil
+
+class Solution:
+    def findCeil(self,root, x):
+        # code here
+        res = -1
+        while root:
+            if root.key == x:
+                return x
+            elif root.key < x:
+                root = root.right
+            else:
+                res = root.key
+                root = root.left
+                
+        return res
+                
+            

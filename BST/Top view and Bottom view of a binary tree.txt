@@ -1,0 +1,57 @@
+#Top View
+
+from collections import deque
+class Solution:
+   
+    def topView(self,root):
+        
+        # code here
+        d = {}
+        if root == None:
+            return []
+        q = deque()
+        q.append([root,0])
+        while q:
+            li = q.popleft()
+            root = li[0]
+            hd = li[1]
+            
+            if hd not in d.keys():
+                d[hd] = root.data
+            
+            if root.left:
+                q.append([root.left, hd-1])
+            
+            if root.right:
+                q.append([root.right, hd+1])
+                
+        return [d[i] for i in sorted(d.keys())]
+
+
+
+
+
+
+#Bottomview
+
+
+from collections import deque
+class Solution:
+    def bottomView(self, root):
+        # code here
+        q = deque()
+        d = {}
+        q.append([root,0])
+        while q:
+            li = q.popleft()
+            root = li[0] 
+            hd = li[1]
+            d[hd] = root.data
+            if root.left:
+                q.append([root.left, hd-1])
+            if root.right:
+                q.append([root.right, hd+1])
+                
+        return [d[i] for i in sorted(d.keys())]
+            
+        

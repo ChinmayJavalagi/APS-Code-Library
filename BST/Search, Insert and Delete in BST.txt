@@ -1,0 +1,63 @@
+#Searching
+
+class BST:
+    
+    #Function to search a node in BST.
+    def search(self, node, x):
+        #code here
+        if node == None: 
+            return False
+        elif node.data == x: 
+            return True
+        elif x > node.data: 
+            return self.search(node.right,x)
+        else:
+            return self.search(node.left,x)
+
+
+#Inserting
+
+def insert(root, Key):
+    # code here
+    if root is None:
+        return Node(Key)
+    
+    if Key < root.data:
+        root.left = insert(root.left, Key)
+    elif Key > root.data:
+        root.right = insert(root.right, Key)
+        
+    return root
+
+
+
+
+#Deleting
+
+def deleteNode(root, x):
+    # code here.
+    if root is None: 
+        return
+    
+    if x < root.data:
+        root.left = deleteNode(root.left, x)
+        
+    elif x > root.data:
+        root.right = deleteNode(root.right, x)    
+    
+    else:
+        if root.left is None:
+            return root.right
+        elif root.right is None:
+            return root.left
+        else:
+            inosuc = inorderSuccessor(root.right)
+            root.data = inosuc
+            root.right = deleteNode(root.right, inosuc)
+        
+    return root
+            
+def inorderSuccessor(root):
+    while root.left!=None:
+        root = root.left
+    return root.data
