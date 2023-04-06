@@ -1,0 +1,30 @@
+index = 0
+
+def serialize(root, A):
+    #code here
+    if root == None: return A.append(-1)
+    
+    
+    A.append(root.data)
+    serialize(root.left,A)
+    serialize(root.right,A)
+    global index 
+    index = 0
+    
+    
+    #Function to deserialize a list and construct the tree.   
+def deSerialize(A):
+    #code here
+    global index
+    if index == len(A): return None
+    
+    val = A[index]
+    index+=1
+    
+    if val == -1: return None
+    
+    root = Node(val)
+    root.left = deSerialize(A)
+    root.right = deSerialize(A)
+    
+    return root

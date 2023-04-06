@@ -1,0 +1,21 @@
+#TC - O(n)
+
+class Solution:
+    def isBalanced(self,root):
+        h = self.check(root)
+        return True if h!=0 else False
+        
+        
+    def check(self,root):
+        if root is None:
+            return 1
+            
+        lh = self.check(root.left)
+        if lh == 0:
+            return 0
+        rh = self.check(root.right)
+        if rh == 0:
+            return 0
+        if abs(lh-rh)>1:
+            return 0
+        return max(lh,rh)+1

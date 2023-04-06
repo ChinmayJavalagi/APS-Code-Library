@@ -1,0 +1,19 @@
+import math
+class Solution:
+    
+    def diameter(self,root):
+        # Code here
+        li = [-math.inf]*1
+        self.height(root, li)
+        return li[0]
+    
+    #Function to return the diameter of a Binary Tree.
+    def height(self, root, li):
+        if root == None: return 0
+        
+        lh = self.height(root.left,li)
+        rh = self.height(root.right,li)
+        
+        li[0] = max(li[0],1+lh+rh)
+        
+        return max(rh,lh)+1

@@ -1,0 +1,10 @@
+def KDistance(root,k):
+    return helper(root,k,[])
+    
+def helper(root,k,arr):
+    if root !=  None:
+        if k == 0:
+            arr.append(root.data)
+        helper(root.left,k-1,arr)
+        helper(root.right,k-1,arr)
+    return arr

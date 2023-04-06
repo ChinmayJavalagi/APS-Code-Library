@@ -1,0 +1,12 @@
+def levelOrder(self,root):
+    arr = []
+    q = deque()
+    q.append(root)
+    while q:
+        root = q.popleft()
+        arr.append(root.data)
+        if root.left!=None:
+            q.append(root.left)
+        if root.right!=None:
+            q.append(root.right)
+    return arr    

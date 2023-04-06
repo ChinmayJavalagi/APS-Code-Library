@@ -1,0 +1,12 @@
+import math
+class Solution:
+    def findMax(self,root):
+        if root == None:
+            return 0
+        return max(self.findMax(root.left),self.findMax(root.right),root.data)
+        
+    def findMin(self,root):
+        #code here
+        if root == None:
+            return math.inf
+        return min(self.findMin(root.left),self.findMin(root.right),root.data)

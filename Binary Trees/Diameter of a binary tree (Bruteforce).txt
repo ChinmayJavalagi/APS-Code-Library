@@ -1,0 +1,11 @@
+def diameter(self,root):
+        # Code here
+        if root == None :
+            return 0
+        currdiameter = self.height(root.left)+self.height(root.right)+1
+        return max(self.diameter(root.left),self.diameter(root.right),currdiameter)
+        
+    def height(self,root):
+        if root == None:
+            return 0
+        return max(self.height(root.left),self.height(root.right))+1

@@ -1,0 +1,28 @@
+#we can construct the tree only by compulsorily using Inorder along with preorder or postorder (preorder + postorder not possible, inorder is must)
+
+
+#using inorder and preorder
+class Solution:   
+    def buildtree(self, inorder, preorder, n):
+        
+        if not preorder or not inorder: return None
+        root = Node(preorder[0])
+        rootInd = inorder.index(preorder[0])
+        root.left = self.buildtree(inorder[:rootInd], preorder[1:rootInd+1], n)
+        root.right = self.buildtree(inorder[rootInd+1:], preorder[rootInd+1:], n)
+        
+        return root
+
+
+#using inorder and post order
+def buildTree(In, post, n):
+    # your code here
+    if not In or not post: return None
+    
+    root = Node(post[-1])
+    rootInd = In.index(post[-1])
+    
+    root.left = buildTree(In[:rootInd], post[:rootInd],n)
+    root.right = buildTree(In[rootInd+1:], post[rootInd:-1], n)
+    
+    return root

@@ -1,0 +1,12 @@
+def verticalWidth(root):
+    # code here
+    s = set()
+    helper(root, 0, s)
+    return len(s)
+    
+def helper(root,hd,s):
+    if root == None:
+        return 0
+    helper(root.left,hd-1,s) 
+    s.add(hd)
+    helper(root.right, hd+1,s)

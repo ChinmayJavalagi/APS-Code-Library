@@ -1,0 +1,17 @@
+#Preorder
+def preorder(root):
+    if root == None:
+        return []
+    return [root.data]+preorder(root.left)+preorder(root.right)
+
+#Postorder
+def postOrder(root):
+    if root == None:
+        return []
+    return postOrder(root.left)+postOrder(root.right)+[root.data]
+
+#Inorder
+def InOrder(root):
+    if root == None:
+        return []
+    return self.InOrder(root.left)+[root.data]+self.InOrder(root.right)

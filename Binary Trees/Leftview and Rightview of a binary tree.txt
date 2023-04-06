@@ -1,0 +1,41 @@
+#LeftView
+
+from collections import deque
+def LeftView(root):
+    
+    if root == None:
+        return []
+    arr = []
+    q = deque()
+    q.append(root)
+    while q:
+        n = len(q)
+        for i in range(n):
+            node = q.popleft()
+            if i == 0:
+                arr.append(node.data)
+            if node.left: q.append(node.left)
+            if node.right: q.append(node.right)
+    return arr 
+
+
+#RightView
+
+def rightView(self,root):
+        if root is None:
+            return []
+        # code here
+        arr = []
+        q = deque()
+        q.append(root)
+        while q:
+            n = len(q)
+            for i in range(n):
+                node = q.popleft()
+                if i == n-1:
+                    arr.append(node.data)
+                
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+                
+        return arr    

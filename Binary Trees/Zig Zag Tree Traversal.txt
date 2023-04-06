@@ -1,0 +1,30 @@
+from collections import deque
+class Solution:
+    #Function to store the zig zag order traversal of tree in a list.
+    def zigZagTraversal(self, root):
+        Your code here
+        if root == None:
+            return []
+        arr2 = []
+        j = 0
+        q = deque()
+        q.append(root)
+        while q:
+            n = len(q)
+            arr = []
+            j +=1
+            for i in range(n):
+                node = q.popleft()
+                arr.append(node.data)
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+            if j%2 == 0:
+                arr.reverse()
+            arr2 += arr
+                
+        return arr2
+                
+
+
+
+https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/solutions/750132/four-python-solutions/?orderBy=most_votes&languageTags=python
